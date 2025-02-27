@@ -91,6 +91,12 @@ export const HomeScreen = () => {
         }
     }
 
+    const handleCategoryPress = (category: string) => {
+        getRecipes(category);
+        setActiveCategory(category);
+        setMeals([]);
+    }
+
     if (!fontsLoaded) {
         return null;
     } else {
@@ -121,7 +127,7 @@ export const HomeScreen = () => {
                     {/*Categories*/}
                     <View>
                         {categories.length > 0 && <Categories categories={categories} activeCategory={activeCategory}
-                                     setActiveCategory={setActiveCategory}/>}
+                                                              handleCategoryPress={handleCategoryPress}/>}
                     </View>
 
                     {/*Recipes*/}
