@@ -28,6 +28,7 @@ import {
     useFonts
 } from "@expo-google-fonts/poppins";
 import YoutubeIframe from 'react-native-youtube-iframe';
+import Animated, {FadeIn, FadeInDown, ZoomIn} from 'react-native-reanimated';
 
 export const RecipeDetailsScreen = ({route} : any) => {
 
@@ -129,7 +130,7 @@ export const RecipeDetailsScreen = ({route} : any) => {
                 </View>
 
                 {/*Back Button and Favorite Button*/}
-                <View style={tw`w-full flex-row absolute justify-between items-center pt-16`}>
+                <Animated.View entering={FadeIn.delay(200).duration(1000).springify()} style={tw`w-full flex-row absolute justify-between items-center pt-16`}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={tw`p-2 rounded-full ml-5 bg-rose-50`}>
                         <ChevronLeftIcon size={30} strokeWidth={4.5} color='rgb(249 115 22)'/>
                     </TouchableOpacity>
@@ -137,7 +138,7 @@ export const RecipeDetailsScreen = ({route} : any) => {
                                       style={tw`p-2 rounded-full ml-5 bg-rose-50 mr-5`}>
                         <HeartIcon size={30} color={isFavorite ? 'red' : 'gray'}/>
                     </TouchableOpacity>
-                </View>
+                </Animated.View>
 
                 {/*Recipe Details*/}
                 {
@@ -147,17 +148,17 @@ export const RecipeDetailsScreen = ({route} : any) => {
                         <View style={tw`px-5 flex justify-between gap-y-4 pt-10`}>
 
                             {/*Name and Area*/}
-                            <View style={tw`gap-y-2`}>
+                            <Animated.View entering={FadeInDown.duration(700).springify().damping(12)} style={tw`gap-y-2`}>
                                 <Text style={[tw`flex-1 text-yellow-950`, {fontFamily: 'Poppins_600SemiBold', fontSize: hp('2.5%')}]}>
                                     {meals?.strMeal}
                                 </Text>
                                 <Text style={[tw`flex-1 text-yellow-950`, {fontFamily: 'Poppins_500Medium', fontSize: hp('1.6%')}]}>
                                     {meals?.strArea}
                                 </Text>
-                            </View>
+                            </Animated.View>
 
                             {/*Category and Instructions*/}
-                            <View style={tw`flex-row justify-around`}>
+                            <Animated.View entering={FadeInDown.delay(100).duration(700).springify().damping(12)} style={tw`flex-row justify-around`}>
                                 <View style={tw`flex rounded-full bg-orange-500 p-2`}>
                                     <View style={[tw`items-center justify-center rounded-full bg-rose-50`,{height: hp('5%'), width: hp('5%')}]}>
                                         <ClockIcon size={hp('3.5%')} color='rgb(66 32 6)'/>
@@ -196,10 +197,10 @@ export const RecipeDetailsScreen = ({route} : any) => {
                                         <Text style={[tw`text-yellow-950`,{fontFamily: 'Poppins_600SemiBold', fontSize: hp('1.4%')}]}>Easy</Text>
                                     </View>
                                 </View>
-                            </View>
+                            </Animated.View>
 
                             {/*Ingredients*/}
-                            <View style={tw`gap-y-4 mt-4`}>
+                            <Animated.View entering={FadeInDown.delay(200).duration(700).springify().damping(12)} style={tw`gap-y-4 mt-4`}>
                                 <Text style={[tw`flex-1 text-yellow-950`, {fontFamily: 'Poppins_600SemiBold', fontSize: hp('2.2%')}]}>
                                     Ingredients
                                 </Text>
@@ -220,29 +221,29 @@ export const RecipeDetailsScreen = ({route} : any) => {
                                         ))
                                     }
                                 </View>
-                            </View>
+                            </Animated.View>
 
                             {/*Instructions*/}
-                            <View style={tw`gap-y-4 mt-4`}>
+                            <Animated.View entering={FadeInDown.delay(300).duration(700).springify().damping(12)} style={tw`gap-y-4 mt-4`}>
                                 <Text style={[tw`flex-1 text-yellow-950`, {fontFamily: 'Poppins_600SemiBold', fontSize: hp('2.2%')}]}>
                                     Instructions
                                 </Text>
                                 <Text style={[tw``, {fontSize: hp('1.6%'), fontFamily: 'Poppins_500Medium'}]}>
                                     {meals?.strInstructions}
                                 </Text>
-                            </View>
+                            </Animated.View>
 
                             {/*Recipe Video*/}
                             {
                                 meals?.strYoutube && (
-                                    <View style={tw`gap-y-4 mt-4`}>
+                                    <Animated.View entering={FadeInDown.delay(400).duration(700).springify().damping(12)} style={tw`gap-y-4 mt-4`}>
                                         <Text style={[tw`flex-1 text-yellow-950`, {fontFamily: 'Poppins_600SemiBold', fontSize: hp('2.2%')}]}>
                                             Recipe Video
                                         </Text>
                                         <View style={tw`flex-row gap-x-2`}>
                                             <YoutubeIframe videoId={getYouTubeVideoId(meals?.strYoutube) || undefined} height={hp('25%')} width={wp('90%')}/>
                                         </View>
-                                    </View>
+                                    </Animated.View>
                                 )
                             }
                         </View>
