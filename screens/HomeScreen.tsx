@@ -121,7 +121,7 @@ export const HomeScreen = () => {
                     <View style={tw`mx-4 flex-row items-center rounded-full bg-yellow-950/10 p-1 mb-6`}>
                         <TextInput placeholder="Search any recipe" placeholderTextColor={'rgb(66 32 6)'} style={[tw`text-yellow-950 flex-1 text-base mt-1 pl-3 tracking-wider`,{fontSize: hp('1.7%'), fontFamily: 'Poppins_400Regular'}]} />
                         <View style={tw`bg-rose-50 p-3 rounded-full`}>
-                            <MagnifyingGlassIcon size={hp('2.5%')} color={'rgb(66 32 6)'}/>
+                            <MagnifyingGlassIcon size={hp('2.5%')} color={'rgb(249 115 22)'}/>
                         </View>
                     </View>
                     {/*Categories*/}
