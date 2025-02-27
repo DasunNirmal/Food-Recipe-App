@@ -1,9 +1,10 @@
-import {Button, Image, ScrollView, Text, TextInput, View} from "react-native";
+import {ScrollView, Text, TextInput, View} from "react-native";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import tw from "twrnc";
+import axios from "axios";
 import {BellIcon, MagnifyingGlassIcon, UserIcon} from "react-native-heroicons/solid";
 import {
     useFonts,
@@ -52,12 +53,29 @@ export const HomeScreen = () => {
     });
 
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+    const [activeCategory, setActiveCategory] = useState('Beef');
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         navigation.setOptions({
             navigationBarColor: 'rgb(255 241 242)',
         });
     }, [navigation]);
+
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    const getCategories = async () => {
+        try {
+            const response = await axios.get('https://themealdb.com/api/json/v1/1/categories.php');
+            if (response && response.data) {
+                setCategories(response.data.categories);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     if (!fontsLoaded) {
         return null;
@@ -88,7 +106,8 @@ export const HomeScreen = () => {
                     </View>
                     {/*Categories*/}
                     <View>
-                        <Categories/>
+                        {categories.length > 0 && <Categories categories={categories} activeCategory={activeCategory}
+                                     setActiveCategory={setActiveCategory}/>}
                     </View>
                 </ScrollView>
             </View>
