@@ -56,6 +56,7 @@ export const HomeScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const [activeCategory, setActiveCategory] = useState('Beef');
     const [categories, setCategories] = useState([]);
+    const [meals, setMeals] = useState([]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -65,6 +66,7 @@ export const HomeScreen = () => {
 
     useEffect(() => {
         getCategories();
+        getRecipes();
     }, []);
 
     const getCategories = async () => {
@@ -72,6 +74,17 @@ export const HomeScreen = () => {
             const response = await axios.get('https://themealdb.com/api/json/v1/1/categories.php');
             if (response && response.data) {
                 setCategories(response.data.categories);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getRecipes = async (category = 'Beef') => {
+        try {
+            const response = await axios.get(`https://themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+            if (response && response.data) {
+                setMeals(response.data.meals);
             }
         } catch (error) {
             console.log(error);
@@ -113,7 +126,7 @@ export const HomeScreen = () => {
 
                     {/*Recipes*/}
                     <View>
-                        <Recipes categories={categories}/>
+                        <Recipes meals={meals} categories={categories}/>
                     </View>
                 </ScrollView>
             </View>
