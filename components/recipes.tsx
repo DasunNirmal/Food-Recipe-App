@@ -26,7 +26,7 @@ import {
 import {mealData} from "../constants/dummy-data";
 import Animated, { FadeInDown} from 'react-native-reanimated';
 
-export const Recipes = ({categories}: any) => {
+export const Recipes = ({meals, categories}: any) => {
 
     let [fontsLoaded] = useFonts({
         Poppins_100Thin,
@@ -57,10 +57,10 @@ export const Recipes = ({categories}: any) => {
                 <Text style={[tw`text-yellow-950`, {fontSize: hp('2.5%'), fontFamily: 'Poppins_600SemiBold'}]}>Recipes</Text>
                 <View>
                     {
-                        categories.length === 0 ? null : (
+                        categories.length === 0 || meals.length === 0 ? null : (
                             <MasonryList
-                                data={mealData}
-                                keyExtractor={(item): string => item.id}
+                                data={meals}
+                                keyExtractor={(item): string => item.idMeal}
                                 numColumns={2}
                                 showsVerticalScrollIndicator={false}
                                 renderItem={({item, i}) => <CardItem item={item} index={i} />}
@@ -79,10 +79,10 @@ const CardItem = ({item,index}: { item: any, index: number }) => {
     return (
         <Animated.View entering={FadeInDown.delay(index * 100).duration(600).springify().damping(20)}>
             <Pressable style={[tw`flex justify-center mb-4 gap-y-2`, {width: '100%', paddingLeft: isEven? 0 : wp('3%'), paddingRight: isEven? wp('3%') : 0}]}>
-                <Image source={{uri: item.image}} style={[tw`bg-yellow-950/8`, {width: '100%', height: index % 3 === 0? hp('25%') : hp('35%'), borderRadius: 35}]}/>
+                <Image source={{uri: item.strMealThumb}} style={[tw`bg-yellow-950/8`, {width: '100%', height: index % 3 === 0? hp('25%') : hp('35%'), borderRadius: 35}]}/>
                 <Text style={[tw`text-yellow-950 ml-2`,{fontSize: hp('1.6%'), fontFamily: 'Poppins_500Medium'}]}>
                     {
-                        item.name.length > 20 ? item.name.slice(0, 20) + '...' : item.name
+                        item.strMeal.length > 20 ? item.strMeal.slice(0, 20) + '...' : item.strMeal
                     }
                 </Text>
             </Pressable>
