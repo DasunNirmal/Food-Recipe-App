@@ -27,6 +27,7 @@ import {
     Poppins_800ExtraBold_Italic, Poppins_900Black, Poppins_900Black_Italic,
     useFonts
 } from "@expo-google-fonts/poppins";
+import YoutubeIframe from 'react-native-youtube-iframe';
 
 export const RecipeDetailsScreen = ({route} : any) => {
 
@@ -72,6 +73,7 @@ export const RecipeDetailsScreen = ({route} : any) => {
     const getMealDataByID = async (id: string) => {
         try {
             const response = await axios.get(`https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+            // console.log(response.data.meals[0]);
             if (response && response.data) {
                 setMeals(response.data.meals[0]);
                 setLeading(false);
@@ -91,6 +93,15 @@ export const RecipeDetailsScreen = ({route} : any) => {
         }
         return ingredients;
     }
+
+    const getYouTubeVideoId = (url: string) => {
+        const regex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|\S*\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        if (match && match[1]) {
+            return match[1];
+        }
+        return null;
+    };
 
     useEffect(() => {
         navigation.setOptions({
@@ -229,7 +240,7 @@ export const RecipeDetailsScreen = ({route} : any) => {
                                             Recipe Video
                                         </Text>
                                         <View style={tw`flex-row gap-x-2`}>
-
+                                            <YoutubeIframe videoId={getYouTubeVideoId(meals?.strYoutube) || undefined} height={hp('25%')} width={wp('90%')}/>
                                         </View>
                                     </View>
                                 )
