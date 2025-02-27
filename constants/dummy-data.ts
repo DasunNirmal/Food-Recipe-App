@@ -27,7 +27,7 @@ export const categoryData = [
 export const mealData = [
     {
         name: 'Shakshuka',
-        image: 'https://www.themealdb.com/images/media/meals/g373701551452625.jpg'
+        image: 'https://www.themealdb.com/images/media/meals/z0ageb1583189517.jpg'
     },
     {
         name: 'Beef Banh Mi Bowls with Sriracha Mayo',
@@ -39,7 +39,7 @@ export const mealData = [
     },
     {
         name: 'Smoky Lentil Chili with Squash',
-        image: 'https://www.themealdb.com/images/media/meals/uwxqwy1483889553.jpg'
+        image: 'https://www.themealdb.com/images/media/meals/tvtxpq1511464705.jpg'
     },
     {
         name: 'Braised Beef Chili',
