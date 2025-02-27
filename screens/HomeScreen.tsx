@@ -28,6 +28,7 @@ import {
     Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
 import {Categories} from "../components/categories";
+import {Recipes} from "../components/recipes";
 
 export const HomeScreen = () => {
 
@@ -90,7 +91,7 @@ export const HomeScreen = () => {
                         <BellIcon size={hp('3.8%')} color={'rgb(66 32 6)'}/>
                     </View>
                     {/*Welcome and Slogan*/}
-                    <View style={tw`mx-4 mt-2 mb-2 mb-6`}>
+                    <View style={tw`mx-4 mt-2 mb-6`}>
                         <Text style={[tw`text-yellow-950`,{fontSize: hp('1.8%'), fontFamily: 'Poppins_500Medium'}]}>Hello, Dasun!</Text>
                         <View>
                             <Text style={[tw`text-yellow-950`,{fontSize: hp('2.8%'), fontFamily: 'Poppins_500Medium'}]}>Make your own Food,</Text>
@@ -108,6 +109,11 @@ export const HomeScreen = () => {
                     <View>
                         {categories.length > 0 && <Categories categories={categories} activeCategory={activeCategory}
                                      setActiveCategory={setActiveCategory}/>}
+                    </View>
+
+                    {/*Recipes*/}
+                    <View>
+                        <Recipes categories={categories}/>
                     </View>
                 </ScrollView>
             </View>
