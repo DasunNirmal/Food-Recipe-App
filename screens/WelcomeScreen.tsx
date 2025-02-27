@@ -60,6 +60,7 @@ export const WelcomeScreen = () => {
         ring_2_padding.value = 0;
         setTimeout(() => {ring_1_padding.value = withSpring(ring_1_padding.value+hp('2.8%'));},300);
         setTimeout(() => {ring_2_padding.value = withSpring(ring_2_padding.value+hp('4%'));},400);
+        setTimeout(() => {navigation.navigate('Home');},2500);
     }, []);
 
     if (!fontsLoaded) {
