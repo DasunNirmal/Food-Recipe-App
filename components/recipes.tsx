@@ -23,7 +23,7 @@ import {
     Poppins_900Black,
     Poppins_900Black_Italic,
 } from '@expo-google-fonts/poppins';
-import Animated, { FadeInDown} from 'react-native-reanimated';
+import Animated, {FadeInDown, ZoomIn} from 'react-native-reanimated';
 import {Loading} from "./loading";
 import {ParamListBase, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
