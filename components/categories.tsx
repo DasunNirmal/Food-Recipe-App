@@ -3,7 +3,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import tw from "twrnc";
 import Animated, { FadeInDown} from 'react-native-reanimated';
 
-export const Categories = ({categories,activeCategory,setActiveCategory}: any) => {
+export const Categories = ({categories,activeCategory,handleCategoryPress}: any) => {
     return (
         <Animated.View entering={FadeInDown.duration(500).springify()}>
             <ScrollView
@@ -18,7 +18,7 @@ export const Categories = ({categories,activeCategory,setActiveCategory}: any) =
 
                     return (
                         <TouchableOpacity key={index} style={tw`flex items-center gap-2 ml-2 w-auto`}
-                        onPress={() => setActiveCategory(category.strCategory)}>
+                        onPress={() => handleCategoryPress(category.strCategory)}>
                             <View style={[tw`rounded-full p-1.5`, activeButtonClass]}>
                                 <Image
                                     source={{uri: category.strCategoryThumb}}
